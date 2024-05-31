@@ -2,7 +2,7 @@ from shodan import Shodan
 
 import json
 
-api = Shodan('insert your Shodan API key here')
+api = Shodan('Insert Shodan API')
 
 def shodan_org_scan(query: str) -> str:
     if ("query" in query):

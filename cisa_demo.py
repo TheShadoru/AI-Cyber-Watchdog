@@ -3,7 +3,7 @@ import ollama
 import cisa_search
 import datetime
 
-llm_model = 'llama2'
+llm_model = 'llama3'
 
 cisaReports = cisa_search.cisa_get_feed()
 #print(len(cisaReports))

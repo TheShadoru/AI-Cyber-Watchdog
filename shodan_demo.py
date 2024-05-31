@@ -1,7 +1,12 @@
-import ollama
+#import ollama
 import shodan_tools
 import cisa_search
 import datetime
+import pastebin
+from ollama import Client
+client = Client(host='http://192.168.1.141:11434')
+import cisa_demo
+
 print("""  ____      _                __        __    _       _     ____                      _ 
   / ___|   _| |__   ___ _ __  \ \      / /_ _| |_ ___| |__ |  _ \  ___   __ _  __   _/ |
  | |  | | | | '_ \ / _ \ '__|  \ \ /\ / / _` | __/ __| '_ \| | | |/ _ \ / _` | \ \ / / |
@@ -18,12 +23,12 @@ Creators: Rich Wickersham, Tom Bendien and Joe Carroll
      .........;;m/;;;;\mmmmmm/;;;;;\m...................... 
   ..........;;;m;;mmmm;;mmmm;;mmmmm;;m...................... 
 ..........;;;;;mmmnnnmmmmmmmmmmnnnmmmm\.................... 
-.........  ;;;;;n/#####\nmmmmn/#####\nmm\................. 
+.........  ;;;;;n/#####\mmmmmn/#####\mmm\................. 
 .......     ;;;;n##...##nmmmmn##...##nmmmm\............. 
 ....        ;;;n#.....|nmmmmn#.....#nmmmmm,l......... 
- ..          mmmn\.../nmmmmmmn\.../nmmmm,m,lll..... 
+ ..          mmmn\.../mmmmmmmn\.../mmmmm,m,lll..... 
           /mmmmmmmmmmmmmmmmmmmmmmmmmmm,mmmm,llll.. 
-      /mmmmmmmmmmmmmmmmmmmmmmm\nmmmn/mmmmmmm,lll/ 
+      /mmmmmmmmmmmmmmmmmmmmmmm\mmmmm/mmmmmmm,lll/ 
    /mmmmm/..........\mmmmmmmmmmnnmnnmmmmmmmmm,ll 
   mmmmmm|...........|mmmmmmmmmmmmmmmmmmmmmmmm,ll 
   \mmmmmmm\......./mmmmmmmmmmmmmmmmmmmmmmmmm,llo 
@@ -48,7 +53,8 @@ Creators: Rich Wickersham, Tom Bendien and Joe Carroll
                  |AI|ooooo.oooooo....ooooooooooooooooooooo 
                /oo\ML/oooo..ooooooooooooooooooo..oooooooooooo 
  """)             
-llm_model = 'llama2'
+
+llm_model = 'llama3'
 
 while True:
     fdtn = str((datetime.datetime.now().day)) + str((datetime.datetime.now().month)) + str((datetime.datetime.now().year)) + str((datetime.datetime.now().hour)) + str((datetime.datetime.now().minute)) + str((datetime.datetime.now().second))
@@ -57,7 +63,7 @@ while True:
     print('\nShodan Report:\n{0}\n\n'.format(shodanReport))
     fullReport = ''
     if len(shodanReport) > 0:
-        stream = ollama.chat(
+        stream = client.chat(
             model=llm_model,
             messages=[{'role': 'user', 'content': 'Here is a report from Shodan: {0} Provide a summary of this report. Then, detail steps of mitigation in bullet format'.format(shodanReport)}],
             stream=True,
@@ -72,6 +78,8 @@ while True:
         file.write("\n\n\n")
         file.write(fullReport)
         file.close()
+        pastebin.SearchPastebin(companyName)
     else:
         print("Information not found.")
+        pastebin.SearchPastebin(companyName)
     print("Done!\n\n")
