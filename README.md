@@ -2,7 +2,7 @@ Background and problem statement:
 In my twenty plus years in the Security industry, I have seen major technical and process driven improvements and efficiencies gained in many key areas across information security. 
 One area that I do not believe has improved enough is the area of vulnerability management.   The race to discover, assess, coordinate and continuously react to critical vulnerabilities (e.g.  known exploitable or zero days) feels more like a hamster wheel of inefficiency than the well-oiled machine that it should be. 
 
-The largest, most well-funded private and public organizations seem to struggle with this issue with results ranging from the scrambling of resources to address vulnerabilities to large avoidable incidents and news-worthy breaches.  
+The largest, most well-funded private and public organizations seem to struggle with this issue with results ranging from the scrambling of resources to address vulnerabilities to large avoidable incidents and news-worthy breaches. 
 The need for a different approach to vulnerability management is paramount for organizations seeking to gain speed during a critical window, before an exploitable vulnerability provides an adversary a path to accomplishing their objective.  With the emergence of Generative AI, I believe we have a viable path to solve this problem and build a new security capability.
 
 Solution: 
