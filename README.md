@@ -8,5 +8,5 @@ The need for a different approach to vulnerability management is paramount for o
 Solution: 
 Build a Privately hosted AI capability that will utilize retrieval-augmented generation, tuned large language models and machine learning to gain immediate insights from internal data sets that you control.  External data sources will be used as a source of enrichment and verification that can reduce the time to identify, assess and respond to a zero day or a known exploitable vulnerability.
 
-This approach and capability allows your security team to focus limited resources on other work that matters(e.g. Incident Response investigations) while the “AI-Cyberwatchdog” helps with the tactical work when a new threat or zero day emerges.
+This approach and capability allows your security team to focus limited resources on other work that matters(e.g. Incident Response investigations) while the “AI Cyber WatchDog” helps with the tactical work when a new threat or zero day emerges.
 This capability also provides your leadership with immediate answers, supportable metrics and the confidence in your AI driven response process that allows you to build toward a future SOC which is driven by data science, AI and efficient automation.  
