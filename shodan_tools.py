@@ -2,9 +2,8 @@ from shodan import Shodan
 
 import json
 
-api = Shodan('Insert Shodan API')
-
-def shodan_org_scan(query: str) -> str:
+def shodan_org_scan(query, apiKey):
+    api = Shodan(apiKey)
     if ("query" in query):
         if "'" in query:
             query = query.replace("'", '"')
