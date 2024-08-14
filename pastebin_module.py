@@ -18,6 +18,10 @@ def SearchPastebin(searchTerms, configuration, fdtn):
         else:
             client = Client(host=configuration.globalConfig['GLOBAL']['OLLAMA_URL'])
     else:
+        if len(configuration.globalConfig['PASTEBIN']['GROQ_LLM']) > 0:
+            llm_model = configuration.globalConfig['PASTEBIN']['GROQ_LLM']
+        else:
+            llm_model = configuration.globalConfig['GLOBAL']['GROQ_LLM']
         usingOllama = False
     
     
@@ -36,12 +40,12 @@ def SearchPastebin(searchTerms, configuration, fdtn):
         link = "https://pastebin.com/raw/" + link
         res = requests.get(link)
         file.write(res.text + "\n\n")
-        print("\n{0}\n".format(link))
+        print("\nSource: {0}\n".format(link))
         if usingOllama:
-            aiReport = inference_module.ollamaInference(res.text, configuration.globalConfig['PASTEBIN']['PROMPT'], client)
+            aiReport = inference_module.ollamaInference(res.text, configuration.globalConfig['PASTEBIN']['PROMPT'], client, llm_model)
             fullReport = fullReport + aiReport
         else:
-            aiReport = inference_module.groqInference(res.text, configuration.globalConfig['PASTEBIN']['PROMPT'], configuration)
+            aiReport = inference_module.groqInference(res.text, configuration.globalConfig['PASTEBIN']['PROMPT'], configuration, llm_model)
             fullReport = fullReport + aiReport
         file.write("\n{0}".format(fullReport))
     file.close()

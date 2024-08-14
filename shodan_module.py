@@ -15,6 +15,10 @@ def startShodan(searchQuery, configuration, fdtn):
         else:
             client = Client(host=configuration.globalConfig['GLOBAL']['OLLAMA_URL'])
     else:
+        if len(configuration.globalConfig['CISA']['GROQ_LLM']) > 0:
+            llm_model = configuration.globalConfig['SHODAN']['GROQ_LLM']
+        else:
+            llm_model = configuration.globalConfig['GLOBAL']['GROQ_LLM']
         usingOllama = False
 
     shodanReport = shodan_tools.shodan_org_scan(searchQuery, configuration.globalConfig['SHODAN']['API_KEY'])
@@ -25,10 +29,10 @@ def startShodan(searchQuery, configuration, fdtn):
 
     if len(shodanReport) > 0:
         if usingOllama:
-            aiReport = inference_module.ollamaInference(shodanReport, configuration.globalConfig['SHODAN']['PROMPT'], client)
+            aiReport = inference_module.ollamaInference(shodanReport, configuration.globalConfig['SHODAN']['PROMPT'], client, llm_model)
             fullReport = fullReport + aiReport
         else:
-            aiReport = inference_module.groqInference(shodanReport, configuration.globalConfig['SHODAN']['PROMPT'], configuration)
+            aiReport = inference_module.groqInference(shodanReport, configuration.globalConfig['SHODAN']['PROMPT'], configuration, llm_model)
             fullReport = fullReport + aiReport
         
         file = open("./reports/shodan_report_{0}.txt".format(fdtn), "a")

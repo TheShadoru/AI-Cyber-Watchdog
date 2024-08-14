@@ -6,7 +6,7 @@ import inference_module
 
 def startCisa(configuration, fdtn):
     usingOllama = True
-    print("Analyzing CISA Advisories...")
+    print("Analyzing CISA Advisories...\nSource: https://www.cisa.gov/cybersecurity-advisories/all.xml")
     if configuration.globalConfig['GLOBAL']['USE_OLLAMA'] == True:
         if len(configuration.globalConfig['CISA']['OLLAMA_LLM']) > 0:
             llm_model = configuration.globalConfig['CISA']['OLLAMA_LLM']
@@ -17,6 +17,10 @@ def startCisa(configuration, fdtn):
         else:
             client = Client(host=configuration.globalConfig['GLOBAL']['OLLAMA_URL'])
     else:
+        if len(configuration.globalConfig['CISA']['GROQ_LLM']) > 0:
+            llm_model = configuration.globalConfig['CISA']['GROQ_LLM']
+        else:
+            llm_model = configuration.globalConfig['GLOBAL']['GROQ_LLM']
         usingOllama = False
 
 
@@ -44,10 +48,10 @@ def startCisa(configuration, fdtn):
             print("No related vendor found in this report")
         
         if usingOllama:
-            aiReport = inference_module.ollamaInference(item, configuration.globalConfig['CISA']['PROMPT'], client)
+            aiReport = inference_module.ollamaInference(item, configuration.globalConfig['CISA']['PROMPT'], client, llm_model)
             fullReport = fullReport + aiReport
         else:
-            aiReport = inference_module.groqInference(item, configuration.globalConfig['CISA']['PROMPT'], configuration)
+            aiReport = inference_module.groqInference(item, configuration.globalConfig['CISA']['PROMPT'], configuration, llm_model)
             fullReport = fullReport + aiReport
     file.write(str(cisaReports))
     file.write("\n\n\n")
