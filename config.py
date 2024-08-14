@@ -58,7 +58,7 @@ class config:
                 '# Enter a valid Ollama LLM model name as needed.\n'
                 'OLLAMA_LLM': 'llama3.1',
                 '# Provide a Groq LLM for the AI Cyber Watchdog to use. The default Groq model we use is: llama-3.1-8b-instant. If you wish to use a different Groq model, you must use model names as shown at https://console.groq.com/docs/models.\n'
-                'GROQ_LLM': 'llama-3.1-8b-instant'
+                'GROQ_LLM': 'llama-3.1-8b-instant',
                 '# An API key is needed for use with Groq inference, enter it here:\n'
                 'GROQ_API_KEY': '<enter Groq API key here>'
                 }
