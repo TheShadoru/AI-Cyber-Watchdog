@@ -15,7 +15,8 @@ class config:
                     'USE_OLLAMA': config['GLOBAL']['USE_OLLAMA'],
                     'OLLAMA_URL': config['GLOBAL']['OLLAMA_URL'],
                     'OLLAMA_LLM': config['GLOBAL']['OLLAMA_LLM'],
-                    'GROQ_LLM': config['GLOBAL']['GROQ_LLM']
+                    'GROQ_LLM': config['GLOBAL']['GROQ_LLM'],
+                    'GROQ_API_KEY': config['GLOBAL']['GROQ_API_KEY']
                 },
                 'SHODAN': {
                     'OLLAMA_URL': config['SHODAN']['OLLAMA_URL'],
@@ -35,9 +36,6 @@ class config:
                     'PROMPT': config['PASTEBIN']['PROMPT'],
                     'OLLAMA_LLM': config['PASTEBIN']['OLLAMA_LLM'],
                     'GROQ_LLM': config['PASTEBIN']['GROQ_LLM']
-                },
-                'GROQ': {
-                    'API_KEY': config['GROQ']['API_KEY']
                 }
             }
             print("\nConfiguration loaded!")
