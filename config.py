@@ -69,27 +69,27 @@ class config:
                 'API_KEY': '<enter Shodan API key here>',
                 'PROMPT': 'Provide a summary of this report. Then, detail steps of mitigation in bullet format.',
                 '# Enter a valid Ollama LLM model name as needed. (This will override the system wide Ollama LLM setting in the “global” section above.)\n'
-                'OLLAMA_LLM': '<enter Ollama LLM name here>',
+                'OLLAMA_LLM': 'llama3.1',
                 '# Enter a valid Groq LLM model name as needed. (This will override the system wide Groq LLM setting in the “global” section above.)\n'
-                'GROQ_LLM': '<enter Groq LLM name here>'
+                'GROQ_LLM': 'llama-3.1-8b-instant'
             }
             config['CISA'] = {
                 '# provide an alternative ollama inference url if desired. (this will override the system wide ollama url setting in the “global” section above.)\n'
                 'OLLAMA_URL': '<enter Ollama url here>',
                 'PROMPT': 'Summarize this article from the CISA RSS Feed.',
                 '# Enter a valid Ollama LLM model name as needed. (This will override the system wide Ollama LLM setting in the “global” section above.)\n'
-                'OLLAMA_LLM': '<enter Ollama LLM name here>',
+                'OLLAMA_LLM': 'llama3.1',
                 '# Enter a valid Groq LLM model name as needed. (This will override the system wide Groq LLM setting in the “global” section above.)\n'
-                'GROQ_LLM': '<enter Groq LLM name here>'
+                'GROQ_LLM': 'llama-3.1-8b-instant'
             }
             config['PASTEBIN'] = {
                 '# provide an alternative ollama inference url if desired. (this will override the system wide ollama url setting in the “global” section above.)\n'
                 'OLLAMA_URL': '<enter Ollama url here>',
                 'PROMPT': 'Provide a summary of this text. If there is any content that references vulnerabilities, exploits, or hacking, the please highlight that.',
                 '# Enter a valid Ollama LLM model name as needed. (This will override the system wide Ollama LLM setting in the “global” section above.)\n'
-                'OLLAMA_LLM': '<enter Ollama LLM name here>',
+                'OLLAMA_LLM': 'llama3.1',
                 '# Enter a valid Groq LLM model name as needed. (This will override the system wide Groq LLM setting in the “global” section above.)\n'
-                'GROQ_LLM': '<enter Groq LLM name here>'
+                'GROQ_LLM': 'llama-3.1-8b-instant'
             }
             with open('watchdog.ini', 'w') as configFile:
                 config.write(configFile)

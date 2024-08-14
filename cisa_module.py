@@ -6,7 +6,7 @@ import inference_module
 
 def startCisa(configuration, fdtn):
     usingOllama = True
-    print("Analyzing CISA Avisories...")
+    print("Analyzing CISA Advisories...")
     if configuration.globalConfig['GLOBAL']['USE_OLLAMA'] == True:
         if len(configuration.globalConfig['CISA']['OLLAMA_LLM']) > 0:
             llm_model = configuration.globalConfig['CISA']['OLLAMA_LLM']
