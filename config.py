@@ -52,40 +52,41 @@ class config:
                 'USE_PASTEBIN': True,
                 '# Do you want to use Ollama for inference? Set to True/False (Disabling Ollama Inference will enable Groq inference as the default inference source for the all modules in the AI Cyber Watchdog. You will need to provide an API key to use for Groq.)\n'
                 'USE_OLLAMA': True,
+                '# If you have set use_ollama = False, no further Ollama setting changes will be needed.\n'
                 '# Provide a global Ollama inference url.\n'
                 'OLLAMA_URL': 'http://127.0.0.1:11434',
-                '# Provide a global Ollama LLM to use.\n'
+                '# Enter a valid Ollama LLM model name as needed.\n'
                 'OLLAMA_LLM': 'llama3.1',
                 '# Provide a Groq LLM for the AI Cyber Watchdog to use. The default Groq model we use is: llama-3.1-8b-instant. If you wish to use a different Groq model, you must use model names as shown at https://console.groq.com/docs/models.\n'
                 'GROQ_LLM': 'llama-3.1-8b-instant'
                 }
             config['SHODAN'] = {
-                '# Provide an alternative Ollama inference url if desired. (This will override the global Ollama URL setting.)\n'
+                '# provide an alternative ollama inference url if desired. (this will override the system wide ollama url setting in the “global” section above.)\n'
                 'OLLAMA_URL': '<enter Ollama url here>',
                 '# An API key is needed to utilize the Shodan module. You can get a Shodan API key here: https://account.shodan.io/billing\n'
                 'API_KEY': '<enter Shodan API key here>',
                 'PROMPT': 'Provide a summary of this report. Then, detail steps of mitigation in bullet format.',
-                '# Provide an Ollama LLM. (This will override the global Ollama LLM setting.)\n'
+                '# Enter a valid Ollama LLM model name as needed. (This will override the system wide Ollama LLM setting in the “global” section above.)\n'
                 'OLLAMA_LLM': '<enter Ollama LLM name here>',
-                '# Provide a Groq LLM. (This will override the global Groq LLM setting.)\n'
+                '# Enter a valid Groq LLM model name as needed. (This will override the system wide Groq LLM setting in the “global” section above.)\n'
                 'GROQ_LLM': '<enter Groq LLM name here>'
             }
             config['CISA'] = {
-                '# Provide an alternative Ollama inference url if desired. (This will override the global Ollama URL setting.)\n'
+                '# provide an alternative ollama inference url if desired. (this will override the system wide ollama url setting in the “global” section above.)\n'
                 'OLLAMA_URL': '<enter Ollama url here>',
                 'PROMPT': 'Summarize this article from the CISA RSS Feed.',
-                '# Provide an Ollama LLM. (This will override the global Ollama LLM setting.)\n'
+                '# Enter a valid Ollama LLM model name as needed. (This will override the system wide Ollama LLM setting in the “global” section above.)\n'
                 'OLLAMA_LLM': '<enter Ollama LLM name here>',
-                '# Provide a Groq LLM. (This will override the global Groq LLM setting.)\n'
+                '# Enter a valid Groq LLM model name as needed. (This will override the system wide Groq LLM setting in the “global” section above.)\n'
                 'GROQ_LLM': '<enter Groq LLM name here>'
             }
             config['PASTEBIN'] = {
-                '# Provide an alternative Ollama inference url if desired. (This will override the global Ollama URL setting.)\n'
+                '# provide an alternative ollama inference url if desired. (this will override the system wide ollama url setting in the “global” section above.)\n'
                 'OLLAMA_URL': '<enter Ollama url here>',
                 'PROMPT': 'Provide a summary of this text. If there is any content that references vulnerabilities, exploits, or hacking, the please highlight that.',
-                '# Provide an Ollama LLM. (This will override the global Ollama LLM setting.)\n'
+                '# Enter a valid Ollama LLM model name as needed. (This will override the system wide Ollama LLM setting in the “global” section above.)\n'
                 'OLLAMA_LLM': '<enter Ollama LLM name here>',
-                '# Provide a Groq LLM. (This will override the global Groq LLM setting.)\n'
+                '# Enter a valid Groq LLM model name as needed. (This will override the system wide Groq LLM setting in the “global” section above.)\n'
                 'GROQ_LLM': '<enter Groq LLM name here>'
             }
             config['GROQ'] = {
