@@ -19,7 +19,6 @@ def SearchPastebin(searchTerms, configuration, fdtn):
             client = Client(host=configuration.globalConfig['GLOBAL']['OLLAMA_URL'])
     else:
         usingOllama = False
-        client = Groq(api_key=configuration.globalConfig['GROQ']['API_KEY'])
     
     
     print("\nSearching pastebin for: {0}...".format(searchTerms))

@@ -18,7 +18,6 @@ def startCisa(configuration, fdtn):
             client = Client(host=configuration.globalConfig['GLOBAL']['OLLAMA_URL'])
     else:
         usingOllama = False
-        client = Groq(api_key=configuration.globalConfig['GROQ']['API_KEY'])
 
 
     cisaReports = cisa_search.cisa_get_feed()

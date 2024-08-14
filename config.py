@@ -53,7 +53,7 @@ class config:
                 '# Do you want to use Ollama for inference? Set to True/False (Disabling Ollama Inference will enable Groq inference as the default inference source for the all modules in the AI Cyber Watchdog. You will need to provide an API key to use for Groq.)\n'
                 'USE_OLLAMA': True,
                 '# If you have set use_ollama = False, no further Ollama setting changes will be needed.\n'
-                '# Provide a global Ollama inference url.\n'
+                '# If needed, provide a global Ollama inference url.\n'
                 'OLLAMA_URL': 'http://127.0.0.1:11434',
                 '# Enter a valid Ollama LLM model name as needed.\n'
                 'OLLAMA_LLM': 'llama3.1',

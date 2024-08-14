@@ -16,7 +16,6 @@ def startShodan(searchQuery, configuration, fdtn):
             client = Client(host=configuration.globalConfig['GLOBAL']['OLLAMA_URL'])
     else:
         usingOllama = False
-        client = Groq(api_key=configuration.globalConfig['GROQ']['API_KEY'])
 
     shodanReport = shodan_tools.shodan_org_scan(searchQuery, configuration.globalConfig['SHODAN']['API_KEY'])
     print('\nShodan Report:\n{0}\n\n'.format(shodanReport))
