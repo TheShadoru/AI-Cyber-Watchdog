@@ -42,55 +42,58 @@ class config:
             }
             print("\nConfiguration loaded!")
         else:
-            print("Configuration not found.\nCreating a configuration file!")
+            print("No configuration file found.\nNow creating a new configuration file called watchdog.ini in the current working directory.")
             config['GLOBAL'] = {
+                '# If you wish to use Shodan, then set use_shodan to True. If not, set it to False. Find out more at: https://www.shodan.io/\n'
                 'USE_SHODAN': False,
+                '# If you wish to use the CISA Feed, then set use_cisa to True. If not, set it to False. Find out more at: https://www.cisa.gov/about/contact-us/subscribe-updates-cisa\n'
                 'USE_CISA': True,
+                '# If you wish to use Pastebin, then set use_pastebin to True. If not, set it to False\n'
                 'USE_PASTEBIN': True,
+                '# Do you want to use Ollama for inference? Set to True/False (Disabling Ollama Inference will enable Groq inference as the default inference source for the all modules in the AI Cyber Watchdog. You will need to provide an API key to use for Groq.)\n'
+                'USE_OLLAMA': True,
                 '# Provide a global Ollama inference url.\n'
                 'OLLAMA_URL': 'http://127.0.0.1:11434',
                 '# Provide a global Ollama LLM to use.\n'
                 'OLLAMA_LLM': 'llama3.1',
-                '# Use Ollama inference? (Disabling Ollama Inference will enable Groq inference. You will need to provide an API key to use for Groq.)\n'
-                'USE_OLLAMA': True,
-                '# Provide a global Groq LLM to use. If a global Groq LLM is set, individual module Groq LLMs will not be used.\n'
+                '# Provide a Groq LLM for the AI Cyber Watchdog to use. The default Groq model we use is: llama-3.1-8b-instant. If you wish to use a different Groq model, you must use model names as shown at https://console.groq.com/docs/models.\n'
                 'GROQ_LLM': 'llama-3.1-8b-instant'
                 }
             config['SHODAN'] = {
-                '# Provide an Ollama inference url. (This will override the global URL.)\n'
-                'OLLAMA_URL': '',
-                '# An API key is needed to utilize the Shodan module.\n'
-                'API_KEY': '',
+                '# Provide an alternative Ollama inference url if desired. (This will override the global Ollama URL setting.)\n'
+                'OLLAMA_URL': '<enter Ollama url here>',
+                '# An API key is needed to utilize the Shodan module. You can get a Shodan API key here: https://account.shodan.io/billing\n'
+                'API_KEY': '<enter Shodan API key here>',
                 'PROMPT': 'Provide a summary of this report. Then, detail steps of mitigation in bullet format.',
-                '# Provide an Ollama LLM. (This will override the global Ollama LLM.)\n'
-                'OLLAMA_LLM': '',
-                '# Provide a Groq LLM. (This will override the global Groq LLM.)\n'
-                'GROQ_LLM': ''
+                '# Provide an Ollama LLM. (This will override the global Ollama LLM setting.)\n'
+                'OLLAMA_LLM': '<enter Ollama LLM name here>',
+                '# Provide a Groq LLM. (This will override the global Groq LLM setting.)\n'
+                'GROQ_LLM': '<enter Groq LLM name here>'
             }
             config['CISA'] = {
-                '# Provide an Ollama inference url. (This will override the global URL.)\n'
-                'OLLAMA_URL': '',
+                '# Provide an alternative Ollama inference url if desired. (This will override the global Ollama URL setting.)\n'
+                'OLLAMA_URL': '<enter Ollama url here>',
                 'PROMPT': 'Summarize this article from the CISA RSS Feed.',
-                '# Provide an Ollama LLM. (This will override the global Ollama LLM.)\n'
-                'OLLAMA_LLM': '',
-                '# Provide a Groq LLM. (This will override the global Groq LLM.)\n'
-                'GROQ_LLM': ''
+                '# Provide an Ollama LLM. (This will override the global Ollama LLM setting.)\n'
+                'OLLAMA_LLM': '<enter Ollama LLM name here>',
+                '# Provide a Groq LLM. (This will override the global Groq LLM setting.)\n'
+                'GROQ_LLM': '<enter Groq LLM name here>'
             }
             config['PASTEBIN'] = {
-                '# Provide an Ollama inference url. (This will override the global URL.)\n'
-                'OLLAMA_URL': '',
+                '# Provide an alternative Ollama inference url if desired. (This will override the global Ollama URL setting.)\n'
+                'OLLAMA_URL': '<enter Ollama url here>',
                 'PROMPT': 'Provide a summary of this text. If there is any content that references vulnerabilities, exploits, or hacking, the please highlight that.',
-                '# Provide an Ollama LLM. (This will override the global Ollama LLM.)\n'
-                'OLLAMA_LLM': '',
-                '# Provide a Groq LLM. (This will override the global Groq LLM.)\n'
-                'GROQ_LLM': ''
+                '# Provide an Ollama LLM. (This will override the global Ollama LLM setting.)\n'
+                'OLLAMA_LLM': '<enter Ollama LLM name here>',
+                '# Provide a Groq LLM. (This will override the global Groq LLM setting.)\n'
+                'GROQ_LLM': '<enter Groq LLM name here>'
             }
             config['GROQ'] = {
-                '# An API key is needed for use with Groq inference.\n'
-                'API_KEY': ''
+                '# An API key is needed for use with Groq inference, enter it here:\n'
+                'API_KEY': '<enter Groq API key here>'
             }
             with open('watchdog.ini', 'w') as configFile:
                 config.write(configFile)
             config.clear()
-            print("Please review the new configuration and restart the program!")
+            print("You will now need to open the new configuration file in a text editor and update it.\nReview instructions in the configuration file and enter API keys and URLs as needed.\nIf you are on a Linux computer, type 'nano ./watchdog.ini' to open the file.\nAfter you have completed making changes, hit crtl-x to save the file and exit from Nano.\nIf you are on a Windows computer, open the configuration file called 'watchdog.ini' with Notepad. Update the file, save and close it.\nThen restart the AI Cyber Watchdog by hitting the up arrow to re-use previous command or by typing: './venv/bin/python3 main.py' at the command line and then hit enter.")
             exit()
