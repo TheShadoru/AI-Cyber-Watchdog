@@ -15,7 +15,7 @@ def ollamaInference(referenceData, prompt, client, inference_model):
     return AIReport
         
 def groqInference(referenceData, prompt, configuration, inference_model):
-    print("GROQ LLM model used: {0}".format(inference_model))
+    print("Groq LLM model used: {0}".format(inference_model))
     client = Groq(api_key=configuration.globalConfig['GLOBAL']['GROQ_API_KEY'])
     chat_completion = client.chat.completions.create(
         messages=[{'role': 'user','content': '{0} {1}'.format(prompt, referenceData)}],

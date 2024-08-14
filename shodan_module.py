@@ -26,6 +26,7 @@ def startShodan(searchQuery, configuration, fdtn):
 
 
     fullReport = ''
+    file = open("./reports/shodan_report_{0}.txt".format(fdtn), "a")
 
     if len(shodanReport) > 0:
         if usingOllama:
@@ -35,9 +36,9 @@ def startShodan(searchQuery, configuration, fdtn):
             aiReport = inference_module.groqInference(shodanReport, configuration.globalConfig['SHODAN']['PROMPT'], configuration, llm_model)
             fullReport = fullReport + aiReport
         
-        file = open("./reports/shodan_report_{0}.txt".format(fdtn), "a")
         file.write("\nSearch for: {0}\n[SHODAN REPORT]:\n{1}\n[AI REPORT]:\n{2}".format(searchQuery,shodanReport,fullReport))
         file.close()
     else:
         print("No information found.")
         file.write("\nSearch for: {0}\n[SHODAN REPORT]:\nNo information found.".format(searchQuery,shodanReport))
+    print("End of Shodan report.")
