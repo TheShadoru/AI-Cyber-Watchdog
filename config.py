@@ -59,6 +59,8 @@ class config:
                 'OLLAMA_LLM': 'llama3.1',
                 '# Provide a Groq LLM for the AI Cyber Watchdog to use. The default Groq model we use is: llama-3.1-8b-instant. If you wish to use a different Groq model, you must use model names as shown at https://console.groq.com/docs/models.\n'
                 'GROQ_LLM': 'llama-3.1-8b-instant'
+                '# An API key is needed for use with Groq inference, enter it here:\n'
+                'GROQ_API_KEY': '<enter Groq API key here>'
                 }
             config['SHODAN'] = {
                 '# provide an alternative ollama inference url if desired. (this will override the system wide ollama url setting in the “global” section above.)\n'
@@ -88,10 +90,6 @@ class config:
                 'OLLAMA_LLM': '<enter Ollama LLM name here>',
                 '# Enter a valid Groq LLM model name as needed. (This will override the system wide Groq LLM setting in the “global” section above.)\n'
                 'GROQ_LLM': '<enter Groq LLM name here>'
-            }
-            config['GROQ'] = {
-                '# An API key is needed for use with Groq inference, enter it here:\n'
-                'API_KEY': '<enter Groq API key here>'
             }
             with open('watchdog.ini', 'w') as configFile:
                 config.write(configFile)
