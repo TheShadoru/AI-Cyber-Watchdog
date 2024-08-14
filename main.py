@@ -20,7 +20,7 @@ def main(configuration):
 
       if len(configuration.globalConfig['SHODAN']['API_KEY']) > 0:
 
-        print("\tStarting shodan module...")
+        print("\n------------------------------------------------\n\tStarting shodan module...")
         query = input("\tEnter hostname, ip(s), company name, or device to search Shodan: ")
 
         import shodan_module
@@ -30,12 +30,12 @@ def main(configuration):
         print("\tNo Shodan API key found!")
 
     if configuration.globalConfig['GLOBAL']['USE_CISA']:
-      print("\tStarting CISA module...")
+      print("\n------------------------------------------------\n\tStarting CISA module...")
       import cisa_module
       cisa_module.startCisa(configuration, fdtn)
     
     if configuration.globalConfig['GLOBAL']['USE_PASTEBIN']:
-      print("\tStarting Pastebin module...")
+      print("\n------------------------------------------------\n\tStarting Pastebin module...")
       import pastebin_module
       query = input("\tEnter hostname, ip(s), company name, or device to search Pastebin: ")
       pastebin_module.SearchPastebin(query, configuration, fdtn)
