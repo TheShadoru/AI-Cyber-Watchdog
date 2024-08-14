@@ -49,9 +49,9 @@ class config:
                 '# If you wish to use the CISA Feed, then set use_cisa to True. If not, set it to False. Find out more at: https://www.cisa.gov/about/contact-us/subscribe-updates-cisa\n'
                 'USE_CISA': True,
                 '# If you wish to use Pastebin, then set use_pastebin to True. If not, set it to False\n'
-                'USE_PASTEBIN': True,
+                'USE_PASTEBIN': False,
                 '# Do you want to use Ollama for inference? Set to True/False (Disabling Ollama Inference will enable Groq inference as the default inference source for the all modules in the AI Cyber Watchdog. You will need to provide an API key to use for Groq.)\n'
-                'USE_OLLAMA': True,
+                'USE_OLLAMA': False,
                 '# If you have set use_ollama = False, no further Ollama setting changes will be needed.\n'
                 '# If needed, provide a global Ollama inference url.\n'
                 'OLLAMA_URL': 'http://127.0.0.1:11434',
