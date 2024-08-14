@@ -33,15 +33,15 @@ def startCisa(configuration, fdtn):
         try:
             equipment = item.split("<li><strong>Equipment</strong>: ")[1].split("</li>")[0]
             fullReport = fullReport + ("\n{0}".format(equipment))
-            print("Equipment: {0}".format(equipment))
+            print("Related Equipment found in this report: {0}".format(equipment))
         except:
-            print("No equipment")
+            print("No related equipment (hardware/software) found in this report")
         try:
             vendor = item.split("<li><strong>Vendor</strong>: ")[1].split("</li>")[0]
             fullReport = fullReport + ("\n{0}".format(vendor))
-            print("Vendor: {0}".format(vendor))
+            print("Related Vendor found in this report: {0}".format(vendor))
         except:
-            print("No vendor")
+            print("No related vendor found in this report")
         
         if usingOllama:
             aiReport = inference_module.ollamaInference(item, configuration.globalConfig['CISA']['PROMPT'], client)
