@@ -1,18 +1,25 @@
 #import shodan_tools
 import cisa_search
 from ollama import Client
+from groq import Groq
+import inference_module
 
 def startCisa(configuration, fdtn):
+    usingOllama = True
     print("Analyzing CISA Avisories...")
-    if len(configuration.globalConfig['CISA']['OLLAMA_URL']) > 0:
-        client = Client(host=configuration.globalConfig['CISA']['OLLAMA_URL'])
+    if configuration.globalConfig['GLOBAL']['USE_OLLAMA'] == True:
+        if len(configuration.globalConfig['CISA']['OLLAMA_LLM']) > 0:
+            llm_model = configuration.globalConfig['CISA']['OLLAMA_LLM']
+        else:
+            llm_model = configuration.globalConfig['GLOBAL']['OLLAMA_LLM']
+        if len(configuration.globalConfig['CISA']['OLLAMA_URL']) > 0:
+            client = Client(host=configuration.globalConfig['CISA']['OLLAMA_URL'])
+        else:
+            client = Client(host=configuration.globalConfig['GLOBAL']['OLLAMA_URL'])
     else:
-        client = Client(host=configuration.globalConfig['GLOBAL']['OLLAMA_URL'])
+        usingOllama = False
+        client = Groq(api_key=configuration.globalConfig['GROQ']['API_KEY'])
 
-    if len(configuration.globalConfig['CISA']['LLM']) > 0:
-        llm_model = configuration.globalConfig['CISA']['LLM']
-    else:
-        llm_model = configuration.globalConfig['GLOBAL']['LLM']
 
     cisaReports = cisa_search.cisa_get_feed()
     #print(len(cisaReports))
@@ -22,6 +29,8 @@ def startCisa(configuration, fdtn):
     fullReport = ''
     file = open("./reports/cisa_report_{0}.txt".format(fdtn), "a")
     for item in cisaReports:
+        print("\n------------------------------------------------\n{0}\n".format(cisaTitles[count]))
+        count = count + 1
         try:
             equipment = item.split("<li><strong>Equipment</strong>: ")[1].split("</li>")[0]
             fullReport = fullReport + ("\n{0}".format(equipment))
@@ -35,16 +44,12 @@ def startCisa(configuration, fdtn):
         except:
             print("No vendor")
         
-        print("\n------------------------------------------------\n{0}\n".format(cisaTitles[count]))
-        count = count + 1
-        stream = client.chat(
-            model=llm_model,
-            messages=[{'role': 'user', 'content': '{0} {1}'.format(item, configuration.globalConfig['CISA']['PROMPT'])}],
-            stream=True,
-        )
-        for chunk in stream:
-            print(chunk['message']['content'], end='', flush=True)
-            fullReport = fullReport + chunk['message']['content']
+        if usingOllama:
+            aiReport = inference_module.ollamaInference(item, configuration.globalConfig['CISA']['PROMPT'], client)
+            fullReport = fullReport + aiReport
+        else:
+            aiReport = inference_module.groqInference(item, configuration.globalConfig['CISA']['PROMPT'], configuration)
+            fullReport = fullReport + aiReport
     file.write(str(cisaReports))
     file.write("\n\n\n")
     file.write(fullReport)

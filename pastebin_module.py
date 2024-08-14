@@ -3,18 +3,23 @@ import json
 import requests
 import datetime
 from ollama import Client
+from groq import Groq
+import inference_module
 
 def SearchPastebin(searchTerms, configuration, fdtn):
     
-    if len(configuration.globalConfig['PASTEBIN']['OLLAMA_URL']) > 0:
-        client = Client(host=configuration.globalConfig['PASTEBIN']['OLLAMA_URL'])
+    if configuration.globalConfig['GLOBAL']['USE_OLLAMA'] == True:
+        if len(configuration.globalConfig['PASTEBIN']['OLLAMA_LLM']) > 0:
+            llm_model = configuration.globalConfig['PASTEBIN']['OLLAMA_LLM']
+        else:
+            llm_model = configuration.globalConfig['GLOBAL']['OLLAMA_LLM']
+        if len(configuration.globalConfig['PASTEBIN']['OLLAMA_URL']) > 0:
+            client = Client(host=configuration.globalConfig['PASTEBIN']['OLLAMA_URL'])
+        else:
+            client = Client(host=configuration.globalConfig['GLOBAL']['OLLAMA_URL'])
     else:
-        client = Client(host=configuration.globalConfig['GLOBAL']['OLLAMA_URL'])
-
-    if len(configuration.globalConfig['PASTEBIN']['LLM']) > 0:
-        llm_model = configuration.globalConfig['PASTEBIN']['LLM']
-    else:
-        llm_model = configuration.globalConfig['GLOBAL']['LLM']
+        usingOllama = False
+        client = Groq(api_key=configuration.globalConfig['GROQ']['API_KEY'])
     
     
     print("\nSearching pastebin for: {0}...".format(searchTerms))
@@ -33,15 +38,11 @@ def SearchPastebin(searchTerms, configuration, fdtn):
         res = requests.get(link)
         file.write(res.text + "\n\n")
         print("\n{0}\n".format(link))
-        
-        stream = client.chat(
-            model=llm_model,
-            messages=[{'role': 'user', 'content': '{0} {1}'.format(res.text, configuration.globalConfig['PASTEBIN']['PROMPT'])}],
-            stream=True,
-        )
-        
-        for chunk in stream:
-            print(chunk['message']['content'], end='', flush=True)
-            fullReport = fullReport + chunk['message']['content']
+        if usingOllama:
+            aiReport = inference_module.ollamaInference(res.text, configuration.globalConfig['PASTEBIN']['PROMPT'], client)
+            fullReport = fullReport + aiReport
+        else:
+            aiReport = inference_module.groqInference(res.text, configuration.globalConfig['PASTEBIN']['PROMPT'], configuration)
+            fullReport = fullReport + aiReport
         file.write("\n{0}".format(fullReport))
     file.close()
