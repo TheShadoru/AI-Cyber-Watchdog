@@ -42,7 +42,7 @@ class config:
             }
             print("\nConfiguration loaded!")
         else:
-            print("No configuration file found.\nNow creating a new configuration file called watchdog.ini in the current working directory.")
+            print("No configuration file found.\nNow creating a new configuration file called watchdog.ini in the current working directory.\n")
             config['GLOBAL'] = {
                 '# If you wish to use Shodan, then set use_shodan to True. If not, set it to False. Find out more at: https://www.shodan.io/\n'
                 'USE_SHODAN': False,
@@ -96,5 +96,5 @@ class config:
             with open('watchdog.ini', 'w') as configFile:
                 config.write(configFile)
             config.clear()
-            print("You will now need to open the new configuration file in a text editor and update it.\nReview instructions in the configuration file and enter API keys and URLs as needed.\nIf you are on a Linux computer, type 'nano ./watchdog.ini' to open the file.\nAfter you have completed making changes, hit crtl-x to save the file and exit from Nano.\nIf you are on a Windows computer, open the configuration file called 'watchdog.ini' with Notepad. Update the file, save and close it.\nThen restart the AI Cyber Watchdog by hitting the up arrow to re-use previous command or by typing: './venv/bin/python3 main.py' at the command line and then hit enter.")
+            print("You will now need to open the new configuration file in a text editor and update it.\nReview instructions in the configuration file and enter API keys and URLs as needed.\n\nIf you are on a Linux computer, type 'nano ./watchdog.ini' to open the file.\nAfter you have completed making changes, hit crtl-x to save the file and exit from Nano.\n\nIf you are on a Windows computer, open the configuration file called 'watchdog.ini' with Notepad. Update the file, save and close it.\n\nThen restart the AI Cyber Watchdog by hitting the up arrow to re-use previous command or by typing: './venv/bin/python3 main.py' at the command line and then hit enter.")
             exit()
