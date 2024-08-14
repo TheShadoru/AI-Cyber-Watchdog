@@ -1,0 +1,8 @@
+ollama
+datetime
+feedparser
+configparser
+shodan
+groq
+requests
+duckduckgo_search
