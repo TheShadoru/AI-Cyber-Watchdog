@@ -1,0 +1,36 @@
+Installation Dependencies for Ubuntu with Shodan only:
+
+Install Git
+sudo apt install git
+
+Install Python3
+sudo apt install python3
+
+Install the Python virtual environment package
+sudo apt install python3.10-venv -y
+
+Install Pip
+sudo apt install python3-pip -y
+
+Get an API Key from Shodan:
+https://developer.shodan.io/api/requirements
+
+Get AI Cyber Watchdog from Github:
+git clone https://github.com/TheShadoru/AI-Cyber-Watchdog.git
+
+Set directory to path of watchdog installation
+cd AI-Cyber-Watchdog
+
+Setup the Python Virtual Environment
+python3 -m venv venv
+
+Install Python dependencies
+./venv/bin/python3 -m pip install -r requirements.txt
+
+Create a “reports” directory to store module logs
+mkdir reports
+
+Start AI Cyber Watchdog
+./venv/bin/python3 main.py
+
+#end
