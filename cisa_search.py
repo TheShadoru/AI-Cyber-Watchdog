@@ -10,7 +10,7 @@ def cisa_get_feed():
     #feedTitles = []
     for entry in feed.entries:
         count += 1
-        if count >= 5:
+        if count >= 2:
             break
         else:
             feedDescriptions.append(entry.description)

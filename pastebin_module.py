@@ -5,10 +5,11 @@ import datetime
 from ollama import Client
 from groq import Groq
 import inference_module
+import sql_module
 
 def SearchPastebin(searchTerms, configuration, fdtn):
     
-    if configuration.globalConfig['GLOBAL']['USE_OLLAMA'] == True:
+    if configuration.globalConfig['GLOBAL']['USE_OLLAMA']:
         if len(configuration.globalConfig['PASTEBIN']['OLLAMA_LLM']) > 0:
             llm_model = configuration.globalConfig['PASTEBIN']['OLLAMA_LLM']
         else:
@@ -49,3 +50,5 @@ def SearchPastebin(searchTerms, configuration, fdtn):
             fullReport = fullReport + aiReport
         file.write("\n{0}".format(fullReport))
     file.close()
+    if configuration.globalConfig['GLOBAL']['USE_SQLITE3']:
+        sql_module.writeData(fdtn, configuration.globalConfig['PASTEBIN']['PROMPT'], results, fullReport)

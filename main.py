@@ -1,5 +1,6 @@
 import config
 import datetime
+import sql_module
 #import inference_module
 
 def initScript():
@@ -13,7 +14,7 @@ def main(configuration):
   
   fdtn = str((datetime.datetime.now().day)) + str((datetime.datetime.now().month)) + str((datetime.datetime.now().year)) + str((datetime.datetime.now().hour)) + str((datetime.datetime.now().minute)) + str((datetime.datetime.now().second))
 
-  if (not configuration.globalConfig['GLOBAL']['USE_OLLAMA'] and len(configuration.globalConfig['GLOBAL']['GROQ_API_KEY']) > 0 or configuration.globalConfig['GLOBAL']['GROQ_API_KEY'] == '<enter Groq API key here>'):
+  if (not configuration.globalConfig['GLOBAL']['USE_OLLAMA'] and len(configuration.globalConfig['GLOBAL']['GROQ_API_KEY']) > 0 and configuration.globalConfig['GLOBAL']['GROQ_API_KEY'] == '<enter Groq API key here>'):
     print("No Groq API key found!")
   else:
     if configuration.globalConfig['GLOBAL']['USE_SHODAN']:
@@ -39,6 +40,9 @@ def main(configuration):
       import pastebin_module
       query = input("\tEnter hostname, ip(s), company name, or device to search Pastebin: ")
       pastebin_module.SearchPastebin(query, configuration, fdtn)
+    
+    if configuration.globalConfig['GLOBAL']['USE_SQLITE3']:
+      sql_module.readDB(fdtn)
     
     print("\nScript complete!")
 
