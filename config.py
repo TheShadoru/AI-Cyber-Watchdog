@@ -5,6 +5,8 @@ class config:
     def __init__(self):
         config = configparser.ConfigParser()
         print("Reading config...")
+        if not os.path.exists("./reports"): 
+            os.makedirs("./reports") 
         if os.path.isfile('./watchdog.ini'):
             config.read('watchdog.ini')
             self.globalConfig = {
@@ -16,7 +18,8 @@ class config:
                     'OLLAMA_URL': config['GLOBAL']['OLLAMA_URL'],
                     'OLLAMA_LLM': config['GLOBAL']['OLLAMA_LLM'],
                     'GROQ_LLM': config['GLOBAL']['GROQ_LLM'],
-                    'GROQ_API_KEY': config['GLOBAL']['GROQ_API_KEY']
+                    'GROQ_API_KEY': config['GLOBAL']['GROQ_API_KEY'],
+                    'USE_SQLITE3': config['GLOBAL']['USE_SQLITE3']
                 },
                 'SHODAN': {
                     'OLLAMA_URL': config['SHODAN']['OLLAMA_URL'],
@@ -65,7 +68,8 @@ class config:
                 'GROQ_LLM': 'llama-3.1-8b-instant',
                 '\n'
                 '# An API key is needed for use with Groq inference, enter it here:\n'
-                'GROQ_API_KEY': '<enter Groq API key here>'
+                'GROQ_API_KEY': '<enter Groq API key here>',
+                'USE_SQLITE3': True
                 }
             config['SHODAN'] = {
                 '# provide an alternative ollama inference url if desired. (this will override the system wide ollama url setting in the “global” section above.)\n'
