@@ -5,7 +5,7 @@ def writeDB(fdtn, prompt, data, response):
     cur = con.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS data(prompt, data, response);")
     con.commit()
-    parameters = (prompt, data, response)
+    parameters = (str(prompt), str(data), str(response))
     cur.execute("INSERT INTO data VALUES(?, ?, ?)", parameters)
     con.commit()
     con.close()

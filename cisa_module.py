@@ -26,14 +26,13 @@ def startCisa(configuration, fdtn):
 
 
     cisaReports = cisa_search.cisa_get_feed()
-    #print(len(cisaReports))
     cisaTitles = cisa_search.cisa_get_titles()
 
     count = 0
     fullReport = ''
-    file = open("./reports/cisa_report_{0}.txt".format(fdtn), "a")
     for item in cisaReports:
         print("\n------------------------------------------------\n{0}\n".format(cisaTitles[count]))
+        print(count)
         count = count + 1
         try:
             equipment = item.split("<li><strong>Equipment</strong>: ")[1].split("</li>")[0]
@@ -54,6 +53,8 @@ def startCisa(configuration, fdtn):
         else:
             aiReport = inference_module.groqInference(item, configuration.globalConfig['CISA']['PROMPT'], configuration, llm_model)
             fullReport = fullReport + aiReport
+
+    file = open("./reports/cisa_report_{0}.txt".format(fdtn), "a")
     file.write(str(cisaReports))
     file.write("\n\n\n")
     file.write(fullReport)
