@@ -1,28 +1,28 @@
 #import shodan_tools
 import cisa_search
-import ollama
+from ollama import Client
 from groq import Groq
 import inference_module
 import sql_module
 
 def startCisa(configuration, fdtn):
+    usingOllama = True
     print("Analyzing Department of Homeland Security; Cybersecurity and Infrastructure Security Agency Advisories...\nSource: https://www.cisa.gov/cybersecurity-advisories/all.xml")
-    if configuration.globalConfig['GLOBAL']['USE_OLLAMA']:
-        usingOllama = True
+    if configuration.globalConfig['GLOBAL']['USE_OLLAMA'] == True:
         if len(configuration.globalConfig['CISA']['OLLAMA_LLM']) > 0:
             llm_model = configuration.globalConfig['CISA']['OLLAMA_LLM']
         else:
             llm_model = configuration.globalConfig['GLOBAL']['OLLAMA_LLM']
         if len(configuration.globalConfig['CISA']['OLLAMA_URL']) > 0:
-            client = ollama.Client(host=configuration.globalConfig['CISA']['OLLAMA_URL'])
+            client = Client(host=configuration.globalConfig['CISA']['OLLAMA_URL'])
         else:
-            client = ollama.Client(host=configuration.globalConfig['GLOBAL']['OLLAMA_URL'])
+            client = Client(host=configuration.globalConfig['GLOBAL']['OLLAMA_URL'])
     else:
-        usingOllama = False
         if len(configuration.globalConfig['CISA']['GROQ_LLM']) > 0:
             llm_model = configuration.globalConfig['CISA']['GROQ_LLM']
         else:
             llm_model = configuration.globalConfig['GLOBAL']['GROQ_LLM']
+        usingOllama = False
 
 
     cisaReports = cisa_search.cisa_get_feed()
@@ -49,7 +49,7 @@ def startCisa(configuration, fdtn):
             print("No related vendor found in this report")
         
         if usingOllama:
-            aiReport = inference_module.ollamaInference(item, configuration.globalConfig['CISA']['PROMPT'], llm_model)
+            aiReport = inference_module.ollamaInference(item, configuration.globalConfig['CISA']['PROMPT'], client, llm_model)
             fullReport = fullReport + aiReport
         else:
             aiReport = inference_module.groqInference(item, configuration.globalConfig['CISA']['PROMPT'], configuration, llm_model)
