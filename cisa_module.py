@@ -59,4 +59,4 @@ def startCisa(configuration, fdtn):
     file.write(fullReport)
     file.close()
     if configuration.globalConfig['GLOBAL']['USE_SQLITE3']:
-        sql_module.writeData(fdtn, configuration.globalConfig['CISA']['PROMPT'], cisaReports, fullReport)
+        sql_module.writeDB(fdtn, configuration.globalConfig['CISA']['PROMPT'], cisaReports, fullReport)

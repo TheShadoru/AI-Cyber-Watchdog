@@ -6,7 +6,7 @@ import inference_module
 import sql_module
 
 def startShodan(searchQuery, configuration, fdtn):
-    if configuration.globalConfig['GLOBAL']['USE_OLLAMA']:
+    if configuration.globalConfig['GLOBAL']['USE_OLLAMA'] == True:
         if len(configuration.globalConfig['SHODAN']['OLLAMA_LLM']) > 0:
             llm_model = configuration.globalConfig['SHODAN']['OLLAMA_LLM']
         else:
@@ -45,4 +45,4 @@ def startShodan(searchQuery, configuration, fdtn):
     print("End of Shodan report.")
     
     if configuration.globalConfig['GLOBAL']['USE_SQLITE3']:
-        sql_module.writeData(fdtn, configuration.globalConfig['SHODAN']['PROMPT'], shodanReport, fullReport)
+        sql_module.writeDB(fdtn, configuration.globalConfig['SHODAN']['PROMPT'], shodanReport, fullReport)

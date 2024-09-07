@@ -9,7 +9,7 @@ import sql_module
 
 def SearchPastebin(searchTerms, configuration, fdtn):
     
-    if configuration.globalConfig['GLOBAL']['USE_OLLAMA']:
+    if configuration.globalConfig['GLOBAL']['USE_OLLAMA'] == True:
         if len(configuration.globalConfig['PASTEBIN']['OLLAMA_LLM']) > 0:
             llm_model = configuration.globalConfig['PASTEBIN']['OLLAMA_LLM']
         else:
@@ -51,4 +51,4 @@ def SearchPastebin(searchTerms, configuration, fdtn):
         file.write("\n{0}".format(fullReport))
     file.close()
     if configuration.globalConfig['GLOBAL']['USE_SQLITE3']:
-        sql_module.writeData(fdtn, configuration.globalConfig['PASTEBIN']['PROMPT'], results, fullReport)
+        sql_module.writeDB(fdtn, configuration.globalConfig['PASTEBIN']['PROMPT'], results, fullReport)
